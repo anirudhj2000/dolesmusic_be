@@ -25,6 +25,7 @@ class BusinessLeadSerializer(serializers.Serializer):
     message = serializers.CharField(max_length=1000, required=False)
     designation = serializers.CharField(max_length=100, required=False)
     phone_number = serializers.CharField(max_length=15, required=False)
+    country_code = serializers.CharField(max_length=10, required=False, allow_blank=True)
 
 
 class OldLeadSerializer(serializers.Serializer):
