@@ -154,6 +154,14 @@ class CreateBusinessLeadView(APIView):
                 "Authorization": f"Zoho-oauthtoken {access_token}",
                 "Content-Type": "application/json",
             }
+            
+            # Combine country_code and phone_number if both exist
+            phone = ''
+            if data.get('country_code') and data.get('phone_number'):
+                phone = f"{data.get('country_code')}{data.get('phone_number')}"
+            elif data.get('phone_number'):
+                phone = data.get('phone_number', '')
+            
             payload = {
                 "data": [
                     {
@@ -161,13 +169,14 @@ class CreateBusinessLeadView(APIView):
                         "Email": data['email'],
                         "Last_Name": data['last_name'],
                         "First_Name": data['first_name'],
+                        "Phone": phone,
                         "Message": data.get('message', ''),
                         "Designation": data.get('designation', '')
                     }
                 ]
             }
 
-            print(payload)
+            # print(payload)
 
             response = requests.post(url, json=payload, headers=headers)
             logging.debug("Response from Zoho (lead creation request): %s", response.json())
