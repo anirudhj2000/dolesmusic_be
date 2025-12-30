@@ -22,7 +22,7 @@ class BusinessLeadSerializer(serializers.Serializer):
     email = serializers.EmailField()
     last_name = serializers.CharField(max_length=100)
     first_name = serializers.CharField(max_length=100)
-    message = serializers.CharField(max_length=1000, required=False)
+    message = serializers.CharField(max_length=1000, required=False, allow_blank=True)
     designation = serializers.CharField(max_length=100, required=False)
     phone_number = serializers.CharField(max_length=15, required=False)
     country_code = serializers.CharField(max_length=10, required=False, allow_blank=True)
